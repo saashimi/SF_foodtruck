@@ -1,7 +1,6 @@
 # Socrata SF API endpoint:
 https://data.sfgov.org/resource/6a9r-agq8.geojson
                                             ^-----outputs raw geojson
-
 #Load up the database:
 ogr2ogr -f "PostgreSQL" PG:"dbname=sf_foodtruck user=kevin" "output.geojson" 
 
@@ -26,6 +25,19 @@ WHERE ST_DWithin(wkb_geometry, ST_PointFromText('POINT(-122.418982 37.779312)',4
 .0044996640028797696);
 # Units, in this case decimal degrees, need to be consistent if you make any 
 boundary calculations.
+
+#This was a PITA
+GDAL_LIBRARY_PATH = '/home/kevin/miniconda3/envs/SF_foodtruck/lib/libgdal.so'
+
+#In psql as superuser:
+CREATE USER foodtruck_user WITH PASSWORD 'foodtruck!';
+GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO foodtruck_user;
+\c foodtruck_master;
+
+$ psql foodtruck_user -h 127.0.0.1 -d sf_foodtruck
+
+
+
 
 #PostgreSQL + PostGIS backend for geometric calculations
 #Leaflet for FrontEnd display?
