@@ -67,8 +67,6 @@ TEMPLATES = [
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
-                #'django.template.loaders.filesystem.Loader', #added
-                #'django.template.loaders.app_directories.Loader' #added
             ],
         },
     },
@@ -135,3 +133,10 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = (
     os.path.join(BASE_DIR, 'static'),
 )
+
+LEAFLET_CONFIG = {
+    'DEFAULT_CENTER': (37.7749, -122.4194),
+    'DEFAULT_ZOOM': 13,
+    'MIN_ZOOM': 1,
+    'MAX_ZOOM': 20,
+}
