@@ -38,10 +38,10 @@ GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO foodtruck_user;
 $ psql foodtruck_user -h 127.0.0.1 -d sf_foodtruck
 
 # To remedy django.db.utils.ProgrammingError: relation "django_content_type" already exists:
-
 python manage.py migrate --fake-initial
 
-
+# Start Cart data app
+python manage.py startapp cart_data
 
 
 

@@ -15,7 +15,9 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
+from cart_data.views import MainPageView
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
+    url(r'^$', MainPageView.as_view()),
 ]
