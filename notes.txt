@@ -30,11 +30,17 @@ boundary calculations.
 GDAL_LIBRARY_PATH = '/home/kevin/miniconda3/envs/SF_foodtruck/lib/libgdal.so'
 
 #In psql as superuser:
-CREATE USER foodtruck_user WITH PASSWORD 'foodtruck!';
+CREATE USER foodtruck_user WITH PASSWORD 'password';
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO foodtruck_user;
+GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO foodtruck_user;
 \c foodtruck_master;
 
 $ psql foodtruck_user -h 127.0.0.1 -d sf_foodtruck
+
+# To remedy django.db.utils.ProgrammingError: relation "django_content_type" already exists:
+
+python manage.py migrate --fake-initial
+
 
 
 
