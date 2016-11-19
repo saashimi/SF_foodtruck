@@ -1,8 +1,11 @@
 <html>
+{% load static %}
 {% load leaflet_tags %}
     <head>
         {% leaflet_js %}
         {% leaflet_css %}
+        <script type="text/javascript" src="{{ STATIC_URL }} static/js/jquery-3.1.1.min.js"></script>
+        <script type="text/javascript" src="{{ STATIC_URL }} static/js/leaflet.ajax.min.js"></script>
         <style media="screen">
             #food_cart { width:100%; height:100%}
         </style>
@@ -10,20 +13,17 @@
     <body>
 
         <script type="text/javascript">
-            function map_init(map, options) {
-                var dataurl = '/cart_db_data/';
-                $.getJSON(dataurl, function(data) {
-                L.geoJson(data).addTo(map);
-                console.log('loaded');
+            function map_init_basic(map, options) {
+                var geojsonPointLayer = new L.GeoJSON.AJAX("{% url 'cart_db_data' %}", {
+                    onEachFeature:function(feature, layer) {
+                        layer.bindPopup(feature.properties.applicant.toString());
+                    }
                 });
+                geojsonPointLayer.addTo(map);
             }
         </script>
 
-        {% leaflet_map "food_cart" callback="map_init" %}
+        {% leaflet_map "food_cart" callback="map_init_basic" %}
+
     </body>
-    <script src="https://code.jquery.com/jquery-3.1.1.min.js"
-  integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
-  crossorigin="anonymous"></script>
-
-
 </html>
