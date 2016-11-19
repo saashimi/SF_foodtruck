@@ -8,11 +8,23 @@
         </style>
     </head>
     <body>
-        {% leaflet_map "food_cart" %}
+        {% leaflet_map "food_cart" callback="map_init" %}
     </body>
     <script src="https://code.jquery.com/jquery-3.1.1.min.js"
   integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8="
   crossorigin="anonymous"></script>
+
+    <script type="text/javascript">
+        function map_init(map, options) {
+            var dataurl = '/cart_db_data/';
+            $.getJSON(dataurl, function(data) {
+            L.geoJson(data).addTo(map);
+            console.log('loaded');
+            });
+        }
+
+loader();
+    </script
     <script src="static/mapScript.js"></script>
 
 </html>

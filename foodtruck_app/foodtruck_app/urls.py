@@ -15,9 +15,10 @@ Including another URLconf
 """
 from django.conf.urls import url
 from django.contrib import admin
-from cart_data.views import MainPageView
+from cart_data.views import MainPageView, cart_db_data_view
 
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', MainPageView.as_view()),
+    url(r'^cart_db_data/', cart_db_data_view, name='cart_db_data'),
 ]

@@ -33,6 +33,8 @@ GDAL_LIBRARY_PATH = '/home/kevin/miniconda3/envs/SF_foodtruck/lib/libgdal.so'
 CREATE USER foodtruck_user WITH PASSWORD 'password';
 GRANT ALL PRIVILEGES ON ALL TABLES IN SCHEMA public TO foodtruck_user;
 GRANT USAGE, SELECT ON ALL SEQUENCES IN SCHEMA public TO foodtruck_user;
+ALTER ROLE foodtruck_user SUPERUSER;
+
 \c foodtruck_master;
 
 $ psql foodtruck_user -h 127.0.0.1 -d sf_foodtruck
@@ -44,6 +46,11 @@ python manage.py migrate --fake-initial
 python manage.py startapp cart_data
 
 
+# Architecture: After loading data to GeoDjango application now, it's time to present it to the user. You can use django template tag like {{object}} but I think it's better to provide api endpoints. I will be using GeoDjango builtin GeoJSON serializer. To do this declare new views in views.py
+
+
+#### We had issues with calling data from db so tried to populate it using loadscripts.
+#### The loadscript had an issue, so we had to use null=True, blank=True allowances.
 
 #PostgreSQL + PostGIS backend for geometric calculations
 #Leaflet for FrontEnd display?
