@@ -20,5 +20,6 @@ from cart_data.views import MainPageView, cart_db_data_view
 urlpatterns = [
     url(r'^admin/', admin.site.urls),
     url(r'^$', MainPageView.as_view()),
-    url(r'^cart_db_data/', cart_db_data_view, name='cart_db_data'),
+    #url(r'^cart_db_data/(?P<lat>)/(?P<lng>)', cart_db_data_view, name='cart_db_data'),
+    url(r'^cart_db_data/', cart_db_data_view, name='cart_db_data')
 ]
