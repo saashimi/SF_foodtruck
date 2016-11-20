@@ -20,7 +20,26 @@
                     }
                 });
                 geojsonPointLayer.addTo(map);
+            
+            var clickCircle;
+            function onMapClick(e) {
+                console.log("we're in here!");
+                if (clickCircle != undefined) {
+                    map.removeLayer(clickCircle);
+                } 
+                    clickCircle = L.circle(e.latlng, 1609 * .5, {
+                    color: 'blue',
+                    fillOpacity: 0,
+                    opacity: 0.5,
+                    zIndex: 999,
+                    }).addTo(map);
             }
+            
+            map.on('click', onMapClick);
+
+            }
+
+
         </script>
 
         {% leaflet_map "food_cart" callback="map_init_basic" %}
