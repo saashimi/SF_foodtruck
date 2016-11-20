@@ -1,6 +1,7 @@
 <html>
 {% load static %}
 {% load leaflet_tags %}
+{% csrf_token %}
     <head>
         {% leaflet_js %}
         {% leaflet_css %}
@@ -18,14 +19,24 @@
                 var clickCircle, geojsonPointLayer;
 
               
-                function getPointsFromClick(lat, lng) {
-                    geojsonPointLayer = new L.GeoJSON.AJAX("{% url 'cart_db_data' %}", {
-                    onEachFeature:function(feature, layer) {
-                        layer.bindPopup(feature.properties.applicant.toString());
-                    }
-                });
-                geojsonPointLayer.addTo(map);
-                }
+                function getPointsFromClick(latitude, longitude) {
+                    $.ajax({
+                        type: 'GET',
+                        url: "cart_db_data/" + latitude.toString() + "/" + longitude.toString(),
+                        success: function (data) {
+                            geojsonPointLayer = L.geoJson(data, {
+                                onEachFeature:function(feature, layer) {
+                                    layer.bindPopup(feature.properties.applicant.toString());
+                            }
+                            })
+                            geojsonPointLayer.addTo(map);
+
+                        } 
+
+                    })                   
+                
+                };
+
 
                 function onMapClick(e) {
                     if (clickCircle != undefined || geojsonPointLayer != undefined)  {
