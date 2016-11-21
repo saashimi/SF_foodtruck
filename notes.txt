@@ -54,3 +54,32 @@ python manage.py startapp cart_data
 
 #PostgreSQL + PostGIS backend for geometric calculations
 #Leaflet for FrontEnd display?
+
+
+
+
+#The "RAW" AJAX CALL ...
+
+function getPointsFromClick(lat, lng) {
+    $.ajax({
+        type: 'get',
+        url: "/cart_db_data/" + "?lat=" + lat + "&lng=" + lng,
+        success: function (data) {
+            var geojsonPointLayer = L.geoJson(data, {
+                onEachFeature:function(feature, layer) {
+                    layer.bindPopup(feature.properties.applicant.toString());
+                }
+            })
+        }
+    })
+}
+
+#VS A streamlined leaflet-ajax library call:
+
+function getPointsFromClick(lat, lng) {
+    var queryString = "?" + "lat=" + lat + "&lng=" + lng;
+    var geojsonPointLayer = new L.GeoJSON.AJAX("cart_db_data" + queryString , {
+    onEachFeature:function(feature, layer) {
+        layer.bindPopup(feature.properties.applicant.toString());
+    }
+}); 
