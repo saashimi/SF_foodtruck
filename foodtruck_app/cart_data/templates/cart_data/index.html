@@ -20,23 +20,14 @@
 
               
                 function getPointsFromClick(lat, lng) {
-                    $.ajax({
-                        type: 'get',
-                        url: "/cart_db_data/" + "?lat=" + lat + "&lng=" + lng,
-                        success: function (data) {
-                            geojsonPointLayer = L.geoJson(data, {
-                                onEachFeature:function(feature, layer) {
-                                    layer.bindPopup(feature.properties.applicant.toString());
-                            }
-                            })
-                            geojsonPointLayer.addTo(map);
-
-                        } 
-
-                    })                   
-                
-                };
-
+                    var queryString = "?" + "lat=" + lat + "&lng=" + lng;
+                    geojsonPointLayer = new L.GeoJSON.AJAX("cart_db_data" + queryString , {
+                    onEachFeature:function(feature, layer) {
+                        layer.bindPopup(feature.properties.applicant.toString());
+                    }
+                });
+                geojsonPointLayer.addTo(map);
+                }
 
                 function onMapClick(e) {
                     if (clickCircle != undefined || geojsonPointLayer != undefined)  {
