@@ -15,7 +15,9 @@ def cart_db_data_view(request):
     return HttpResponse(cart_db_data_as_geojson, content_type='json')
 """
 
-def cart_db_data_view(request, lat, lng, radius=1609*.5):
+def cart_db_data_view(request, radius=1609*.5):
+    lat = request.GET.get('lat')
+    lng = request.GET.get('lng')
     user_location = fromstr('POINT({0} {1})'.format(lng, lat))
     desired_radius = {'m' : radius}
     nearby_carts = Cart_db_data.objects.filter(
