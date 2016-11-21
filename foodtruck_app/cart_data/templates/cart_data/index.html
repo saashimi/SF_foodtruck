@@ -19,10 +19,10 @@
                 var clickCircle, geojsonPointLayer;
 
               
-                function getPointsFromClick(latitude, longitude) {
+                function getPointsFromClick(lat, lng) {
                     $.ajax({
-                        type: 'GET',
-                        url: "cart_db_data/" + latitude.toString() + "/" + longitude.toString(),
+                        type: 'get',
+                        url: "/cart_db_data/" + "?lat=" + lat + "&lng=" + lng,
                         success: function (data) {
                             geojsonPointLayer = L.geoJson(data, {
                                 onEachFeature:function(feature, layer) {
@@ -50,6 +50,7 @@
                         zIndex: 999,
                         }).addTo(map);
 
+                        console.log(e.latlng);
                         getPointsFromClick(e.latlng.lat, e.latlng.lng);
 
                 }
