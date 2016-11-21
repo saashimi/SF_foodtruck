@@ -1,6 +1,6 @@
 # SF Foodtruck Locator Application
 
-This is a web application inspired by a KQED code challenge. Namely, how to use
+This is a web application inspired by an Uber code challenge. Namely, how to use
 Socrata API data and display it so that a user can find foodtrucks in San Francisco
 within a half-mile radius from an input location.
 
