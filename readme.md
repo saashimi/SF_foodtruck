@@ -9,4 +9,4 @@ This project uses PostgreSQL 9.5 and PostGIS for spatial lookups. The Django 1.1
 makes navigating the geographic data much easier, especially with gdal tools. Django-leaflet 0.19 is used for the frontend. 
 
 ## Screenshot
- 
+![alt tag](https://github.com/saashimi/SF_foodtruck/blob/dev/screenshot.gif)  
