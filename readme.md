@@ -14,7 +14,7 @@ makes navigating the geographic data much easier, especially with gdal tools. Dj
 ## Misc. Development Notes
 [Used the following SF Socrata API endpoint](https://data.sfgov.org/Economy-and-Community/Mobile-Food-Facility-Permit/rqzj-sfat) and saved as .geojson.
 
-Populated the PostgreSQL (and PostGIS-enabled) database with the [geodjango LayerMapping data import utility](https://docs.djangoproject.com/en/1.10/ref/contrib/gis/layermapping/)
+Populated the PostgreSQL (and PostGIS-enabled) database with the [geodjango LayerMapping data import utility]:(https://docs.djangoproject.com/en/1.10/ref/contrib/gis/layermapping/)
 ```
 $ python manage.py ogrinspect <filename>.geojson <model_name> --mapping
 
@@ -22,7 +22,7 @@ $ python manage.py ogrinspect <filename>.geojson <model_name> --mapping
 Created a python load script to extract all features and place them into the PostgreSQL database:
 ```python
 def run(verbose=True):
-    lm = LayerMapping(<model name>, <.geojson file>, <Layer Mapping Data>,
+    lm = LayerMapping(<"model name">, <".geojson file">, <"Layer Mapping Data">,
                       transform=False, encoding='utf-8') 
                   
     lm.save(strict=True, verbose=verbose)
