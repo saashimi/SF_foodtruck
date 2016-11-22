@@ -10,7 +10,7 @@ r = requests.get('https://data.sfgov.org/resource/6a9r-agq8.geojson')
 with open('output.geojson', 'w') as data:
     data.write(json.dumps(r.json()))
 
-#inject geojson into DB
+#inject geojson into DB# NOTE: WE DIDN'T USE THIS:
 ogr2ogr -f "PostgreSQL" PG:"dbname=sf_foodtruck user=kevin" "output.geojson"
 ogr2ogr -f "PostgreSQL" PG:"dbname=my_database user=postgres" "source_data.json" -nln destination_table -append 
 #                   ^-------if you want to append to existing table. Note that
