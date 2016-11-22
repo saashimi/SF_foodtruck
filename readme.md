@@ -12,14 +12,14 @@ makes navigating the geographic data much easier, especially with gdal tools. Dj
 ![alt tag](https://github.com/saashimi/SF_foodtruck/blob/dev/screenshot.gif)  
 
 ## Misc. Development Notes
-[Used the following SF Socrata API endpoint](https://data.sfgov.org/Economy-and-Community/Mobile-Food-Facility-Permit/rqzj-sfat) and saved as .geojson.
+[Use the following SF Socrata API endpoint](https://data.sfgov.org/Economy-and-Community/Mobile-Food-Facility-Permit/rqzj-sfat) and save as .geojson.
 
-Populated the PostgreSQL (and PostGIS-enabled) database with the [geodjango LayerMapping data import utility]:(https://docs.djangoproject.com/en/1.10/ref/contrib/gis/layermapping/)
+Populate the PostgreSQL (and PostGIS-enabled) database with the [geodjango LayerMapping data import utility:](https://docs.djangoproject.com/en/1.10/ref/contrib/gis/layermapping/)
 ```
 $ python manage.py ogrinspect <filename>.geojson <model_name> --mapping
 
 ```
-Created a python load script to extract all features and place them into the PostgreSQL database:
+Create a python load script to extract all features and place them into the PostgreSQL database:
 ```python
 def run(verbose=True):
     lm = LayerMapping(<"model name">, <".geojson file">, <"Layer Mapping Data">,
