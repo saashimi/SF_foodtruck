@@ -74,7 +74,7 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'foodtruck_app.wsgi.application'
 
-GDAL_LIBRARY_PATH = '/home/kevin/miniconda3/envs/SF_foodtruck/lib/libgdal.so'
+GDAL_LIBRARY_PATH = '/home/kevin/anaconda3/envs/SF_foodtruck/lib/libgdal.so'
 
 
 # Database
